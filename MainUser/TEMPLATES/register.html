@@ -1,0 +1,24 @@
+<h2>Registration</h2>
+
+{% if passError %}
+    <h3>Bład</h3>
+    <ul>
+        {% for message in passError %}
+            <li>{{message}}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+{% if error %}
+    <p>{{error}}</p>
+{% endif %}
+
+<!-- we have to add button !!  -->
+<form action="{% url 'register' %}" method="post"
+    {{form}}
+    {% csrf_token %}
+    <button type="submit">Sign up</button>
+</form>
+
+<a href="{%url 'register'%}">Zarejestruj</a>
