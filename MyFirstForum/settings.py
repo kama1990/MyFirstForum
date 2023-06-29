@@ -61,7 +61,7 @@ ROOT_URLCONF = 'MyFirstForum.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'baseTemplates'], # base dir is a main folder , if base.html deeper that folder baseTemplates , we have to mention about all folders 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,3 +128,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# we have to conect with our media , css, photos etc
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'

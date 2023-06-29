@@ -1,0 +1,24 @@
+a {
+  font-weight: bold;
+}
+ 
+ /* unvisited link and visited link */
+a:link, a:visited {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+/* mouse over link  and selected link*/
+a:hover, a:active {
+    background-color: black;
+}
+body {
+    background-color: whitesmoke;
+}
+h3 {
+    color: #4caf99;
+    text-align: center;
+}

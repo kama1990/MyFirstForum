@@ -1,7 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'MainUser/css/register.css' %}">
+{% endblock %}
+
 <h2>Registration</h2>
 
 {% if passError %}
-    <h3>Bład</h3>
+    <h3>Mistake</h3>
     <ul>
         {% for message in passError %}
             <li>{{message}}</li>
@@ -9,16 +19,19 @@
     </ul>
 {% endif %}
 
+{% if userPrint %}
+    <h3>{{userPrint}}</h3>
+{% endif %}
 
 {% if error %}
-    <p>{{error}}</p>
+    <h3>{{error}}</h3>
 {% endif %}
 
 <!-- we have to add button !!  -->
 <form action="{% url 'register' %}" method="post"
-    {{form}}
+    {{form.as_p}}
     {% csrf_token %}
-    <button type="submit">Sign up</button>
+    <button type="submit">Register</button>
 </form>
 
-<a href="{%url 'register'%}">Zarejestruj</a>
+{% endblock content %}

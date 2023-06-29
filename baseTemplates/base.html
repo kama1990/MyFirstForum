@@ -1,0 +1,41 @@
+<!-- we have to remeber to add templates base to settings - TEMPLATES / DIR  -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'MainUser/css/base.css' %}">
+    <title>
+        {% block title %}
+        Twarzo-ksiazka
+        {% endblock title %}
+    </title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <!-- we want to chcek if anyone is logIn or logOut -->
+        <h3>Hello {{user}} ! It's really very nice to see you again !</h3>
+
+        <a href="{% url 'logOutUser' %}">LogOut</a>
+        <a href="#">Posts</a>
+        <a href="#">The newest posts</a>
+
+    {% else %}
+
+        <a href="{% url 'register' %}">Registration</a>
+        <a href="{% url 'logUser' %}">LogIn</a>
+    
+    {% endif %}
+
+    <a href="{% url 'home' %}">Home</a>
+    
+
+    {% block content %}
+
+    {% endblock content %}
+
+
+</body>
+</html>

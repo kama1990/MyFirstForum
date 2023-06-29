@@ -1,0 +1,36 @@
+body {
+    background-color: whitesmoke;
+}
+
+h1 {
+    color: #4CAF50;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    margin-top: 20px;
+    margin-left: 660px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    
+  }
+
+form {
+    text-align: center;
+    text-decoration: none;
+    
+  }
+  div {
+    color: #a80c14;
+    text-align: center;
+    margin-bottom: 10px;
+    border: 1px solid black;
+
+  }
