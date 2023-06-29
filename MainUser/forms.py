@@ -13,4 +13,3 @@ class MyOwnRegisterForm(UserCreationForm):
         model = User
         fields = ('username', 'name', 'email', 'password1', 'password2')
         
-      
