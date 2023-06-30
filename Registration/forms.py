@@ -1,5 +1,6 @@
 from django import forms
-from .models import Posts
+from .models import Posts, Comment
+
 
 # the user have to create new posts 
 class PostForm(forms.ModelForm):
@@ -10,4 +11,9 @@ class PostForm(forms.ModelForm):
         # we have also another 2 diffrent options:
         # exclude = ('createDate','published','user') # Show all fields from model except these
         # fields = '__all__' # Show all fields from model
+
         
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('user', 'content')     

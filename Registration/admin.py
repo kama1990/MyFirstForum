@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Posts
+from .models import Posts, Comment
 # Register your models here.
 
 
@@ -8,3 +8,13 @@ class CreateDate(admin.ModelAdmin):
     readonly_fields=('createDate',)
 
 admin.site.register(Posts, CreateDate)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'content', 'post', 'createDate', 'active')
+    list_filter = ('active', 'createDate')
+    search_fields = ('user', 'content')
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(active=True)

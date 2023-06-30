@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Posts
-from .forms import PostForm
+from .models import Posts, Comment
+from .forms import PostForm, CommentForm
+
+
 # Create your views here.
 
 # Home page
@@ -49,4 +51,9 @@ def deletePost(request, postId):
     post = get_object_or_404(Posts, id=postId, user=request.user)
     post.delete()
     return render(request, 'deletePost.html') # we could use retur redirect('posts' ), we have to know where we want to put user through after delete post . posts is name from urls. but we wanted , that user knew that he is delete post .
+
+
+def post_detail(request, postId):
+    pass
+    
 
