@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!-- Create form based on Django model form to creating tasks. Form is provided in form context and secured with csrf token-->
+<h2>Create your post</h2>
+<h3>What are you thinking now ?</h3>
+
+{% if error %}
+    <h3>{{error}}</h3>
+{% endif %}
+
+<form action="{% url 'createNewPosts' %}" method="post">
+    {{form.as_p}}
+    {% csrf_token %}
+    <button type="submit">Create post</button>
+</form>
+
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Edit post: {{post.title}}</h1>
+<form action="{% url 'detail' post.id %}" method="post">
+    {{form.as_p}}
+    {% csrf_token %}
+    <button type="submit">Save</button>
+</form>
+
+<!-- delete -->
+<a href="{% url 'deletePost' post.id %}">Delete post</a>
+
+{% endblock content %}

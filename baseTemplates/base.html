@@ -6,7 +6,9 @@
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="{% static 'MainUser/css/base.css' %}">
+    
     <title>
         {% block title %}
         Twarzo-ksiazka
@@ -19,8 +21,8 @@
         <h3>Hello {{user}} ! It's really very nice to see you again !</h3>
 
         <a href="{% url 'logOutUser' %}">LogOut</a>
-        <a href="#">Posts</a>
-        <a href="#">The newest posts</a>
+        <a href="{% url 'posts' %}">My own posts</a>
+        <a href="{% url 'createNewPosts' %}">Create post</a>
 
     {% else %}
 

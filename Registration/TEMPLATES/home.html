@@ -2,7 +2,21 @@
 
 {% block content %}
 
-<h1>home</h1>
+<h1>Main page</h1>
+
+<div>
+{% for allPost in allPosts %}
+
+    <a href="{% url 'posts' %}"><h2>{{allPost.title}}</h2></a>
+    <p>Data publikacji: {{allPost.createDate}}</p>
+	<h3>{{allPost.text|truncatechars:60}}</h3>
+    <h4>{{allPost.dec}}</h4>
+    {% if allPost.image %}
+        <img src="{{allPost.image.url}}" alt="photo">
+    {% endif %}
+    <h4>Autor: {{allPost.user}}</h4>
+{% endfor %}
+</div>
 
 
 {% endblock content %}
