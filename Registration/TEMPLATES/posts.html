@@ -4,7 +4,8 @@
 
 
 {% for post in posts%}
-    <a href="{% url 'detail' post.id %}"><h2>{{post.title}}</h2></a>
+    <h2>{{post.title}}</h2>
+    <a href="{% url 'detailPost' post.id %}"><h2>{{post.title}}</h2></a>
     <p>{{post.createDate}}</p>
     <h4>{{post.dec}}</h4>
     {% if post.image %}

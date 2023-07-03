@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+hej
+
+{% block content %}
+
+<h1>{{post.title}}</h1>
+<p>{{post.createDate}}</p>
+<h4>{{post.dec}}</h4>
+<h4>Author: {{post.user}}</h4>
+<h4>Topic: {{post.topic}}</h4>
+
+
+{% if post.image %}
+    <img src="{{post.image.url}}" alt="photo">
+{% endif %}
+
+
+{% if post.user == user %}
+<a href="{% url 'detail' post.id %}">Edit</a>
+    
+{% endif %}
+    
+
+
+    
+{% endblock content %}
+
+    

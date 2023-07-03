@@ -57,10 +57,12 @@ def detail(request, postId):
 def deletePost(request, postId):
     post = get_object_or_404(Posts, id=postId, user=request.user)
     post.delete()
-    return render(request, 'deletePost.html') # we could use retur redirect('posts' ), we have to know where we want to put user through after delete post . posts is name from urls. but we wanted , that user knew that he is delete post .
+    return redirect('posts')
+    # return render(request, 'deletePost.html') # we could use retur redirect('posts' ), we have to know where we want to put user through after delete post . posts is name from urls. but we wanted , that user knew that he is delete post .
 
-
-def myComments(request, postId):
-    pass
+# we want to open each post , after below view , we create html file and path in urls
+def detailPost(request, postId):
+    post = get_object_or_404(Posts, id=postId)
+    return render(request, 'detailPost.html', {'post':post})
     
 

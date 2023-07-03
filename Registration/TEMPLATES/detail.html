@@ -14,10 +14,10 @@
     {% csrf_token %}
     <button type="submit">Save</button>
 </form>
-
+<br>
 <!-- delete -->
-<a href="{% url 'deletePost' post.id %}">Delete post</a>
 
+<a href="{% url 'deletePost' post.id %}">Delete post</a>
 
 
 {% endblock content %}
