@@ -12,7 +12,7 @@ def home(request):
 
 
 def posts(request):
-    usersPosts = Posts.objects.filter(user=request.user).order_by('-createDate')
+    usersPosts = Posts.objects.all().order_by('-createDate')
     return render(request, 'posts.html', {'posts':usersPosts})
 
 def createNewPosts(request):
@@ -20,7 +20,7 @@ def createNewPosts(request):
         return render(request, 'createNewPosts.html', {'form': PostForm()})
 
     else:
-        form = PostForm(request.POST) # create POstForm and fill it with request data
+        form = PostForm(request.POST, request.FILES) # create POstForm and fill it with request data
         if form.is_valid(): # if data is valid
             post = form.save(commit=False) # it create post but it will be not save yet
             post.user = request.user # we have to add user

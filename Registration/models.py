@@ -26,9 +26,16 @@ class Posts(models.Model):
     published = models.BooleanField()
     image = models.ImageField(upload_to='images/',blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE) # Creating many to many relationship with User model
-
+    topics = [
+        ('', 'Wybierz temat'),
+        ('sold', 'Sprzedam'),
+        ('buy', 'Kupię'),
+        ('rent', 'Wypożyczę'),
+        ('look', 'Szukam'),
+        ('else', 'Inne'),
+    ]
+    topic = models.CharField(max_length=4, choices=topics, default='')
   
-
     def __str__(self):
         return f'{self.title} | {self.user}'
     
@@ -44,6 +51,7 @@ class Comment(models.Model):
     content = models.TextField()
     createDate = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=False)
+    image = models.ImageField(upload_to='images/', blank=True)
 
 
     class Meta:

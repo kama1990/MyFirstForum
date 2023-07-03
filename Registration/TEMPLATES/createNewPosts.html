@@ -11,9 +11,10 @@
     <h3>{{error}}</h3>
 {% endif %}
 
-<form action="{% url 'createNewPosts' %}" method="post">
-    {{form.as_p}}
+<form enctype="multipart/form-data" method="post">
+    
     {% csrf_token %}
+    {{form.as_p}}
     <button type="submit">Create post</button>
 </form>
 

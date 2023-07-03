@@ -3,7 +3,7 @@
 
 
 
-{% for post in posts %}
+{% for post in posts%}
     <a href="{% url 'detail' post.id %}"><h2>{{post.title}}</h2></a>
     <p>{{post.createDate}}</p>
     <h4>{{post.dec}}</h4>
