@@ -11,11 +11,13 @@
     <p>Data publikacji: {{allPost.createDate}}</p>
 	<h3>{{allPost.text|truncatechars:60}}</h3>
     <h4>{{allPost.dec}}</h4>
+    
+
     {% if allPost.image %}
         <img src="{{allPost.image.url}}" alt="photo">
     {% endif %}
     <h4>Autor: {{allPost.user}}</h4>
-
+    <h4>Temat: {{allPost.topic}}</h4>
             
 {% endfor %}
 

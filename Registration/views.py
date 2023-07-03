@@ -32,6 +32,9 @@ def createNewPosts(request):
             # the second chance for user
             return render(request, 'createNewPosts.html', {'form': PostForm(), 'error': error})
         
+def my(requst):
+    pass
+
 # we want to edit the posts        
 def detail(request, postId):
     post = get_object_or_404(Posts, id=postId, user=request.user)
@@ -40,11 +43,15 @@ def detail(request, postId):
         return render(request, 'detail.html', {'post':post, 'form':form})
     else:
         # we want to fillin postformfor exist post , user is there  /  user jest zaciagny z instancji/
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             #zawsze return na koniec widoku
             return redirect('posts')
+        # we want to gives one more chance to user
+        else:
+            error = "Something went wrong. Please try one more time"
+            return render(request, 'detail.html', {'post':post, 'form':form, 'error':error})
         
 
 def deletePost(request, postId):
@@ -53,7 +60,7 @@ def deletePost(request, postId):
     return render(request, 'deletePost.html') # we could use retur redirect('posts' ), we have to know where we want to put user through after delete post . posts is name from urls. but we wanted , that user knew that he is delete post .
 
 
-def post_detail(request, postId):
+def myComments(request, postId):
     pass
     
 
