@@ -1,34 +1,20 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
-<h1>Main page</h1>
 
-<div>
-{% for allPost in allPosts %}
 
-    <a href="{% url 'posts' %}"><h2>{{allPost.title}}</h2></a>
-    <p>Data publikacji: {{allPost.createDate}}</p>
-	<h3>{{allPost.text|truncatechars:60}}</h3>
-    <h4>{{allPost.dec}}</h4>
-    
-
-    {% if allPost.image %}
-        <img src="{{allPost.image.url}}" alt="photo">
+    {% for post in posts%}
+<hr>
+    <a href="{% url 'detailPost' post.id %}"><h2>{{post.title}}</h2></a>
+    <p>{{post.createDate}}</p>
+    <h4>{{post.dec}}</h4>
+    {% if post.image %}
+        <img src="{{post.image.url}}" alt="photo">
     {% endif %}
-    <h4>Author: {{allPost.user}}</h4>
-    <h4>Topic: {{allPost.topic}}</h4>
+
+    {% endfor %}
 
 
-    
-{% for postComment in postComments %}
-{{postComment.post}}
-{{postComment.user}}
-{{postComment.content}}
-{% endfor %}
-            
-{% endfor %}
 
 
 {% endblock content %}
-
