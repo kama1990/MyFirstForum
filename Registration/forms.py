@@ -1,5 +1,5 @@
 from django import forms
-from .models import Posts, Comment
+from .models import Posts, PostComment
 
 
 # the user have to create new posts 
@@ -15,5 +15,5 @@ class PostForm(forms.ModelForm):
         
 class CommentForm(forms.ModelForm):
     class Meta:
-        model = Comment
+        model = PostComment
         fields = ('user', 'content')     

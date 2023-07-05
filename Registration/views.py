@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Posts, Comment
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from .models import Posts
 from .forms import PostForm, CommentForm
 
 
@@ -15,12 +15,13 @@ def posts(request):
     usersPosts = Posts.objects.all().order_by('-createDate')
     return render(request, 'posts.html', {'posts':usersPosts})
 
+
 def createNewPosts(request):
     if request.method == 'GET': # When used GET method eg. web loading, create empty creation form
         return render(request, 'createNewPosts.html', {'form': PostForm()})
 
     else:
-        form = PostForm(request.POST, request.FILES) # create POstForm and fill it with request data
+        form = PostForm(request.POST, request.FILES) # create POstForm and fill it with request data, requests.FILEDS are neccesery for image which user would like to upload
         if form.is_valid(): # if data is valid
             post = form.save(commit=False) # it create post but it will be not save yet
             post.user = request.user # we have to add user
@@ -32,11 +33,10 @@ def createNewPosts(request):
             # the second chance for user
             return render(request, 'createNewPosts.html', {'form': PostForm(), 'error': error})
         
-def my(requst):
-    pass
 
 # we want to edit the posts        
 def detail(request, postId):
+    # Use get() to return an object, or raise a Http404 exception if the object does not exist.
     post = get_object_or_404(Posts, id=postId, user=request.user)
     if request.method == 'GET':
         form = PostForm(instance=post)
@@ -65,4 +65,6 @@ def detailPost(request, postId):
     post = get_object_or_404(Posts, id=postId)
     return render(request, 'detailPost.html', {'post':post})
     
+
+
 
