@@ -11,6 +11,11 @@ def home(request):
     return render(request, 'home.html', {'posts':usersPosts})
 
 
+def myOwn(request):
+    posts = Posts.objects.filter(user=request.user)
+    return render(request, 'myOwn.html', {"posts":posts})
+
+
 def createNewPosts(request):
     if request.method == 'GET': # When used GET method eg. web loading, create empty creation form
         return render(request, 'createNewPosts.html', {'form': PostForm()})
