@@ -14,12 +14,14 @@ hej
 {% if post.image %}
     <img src="{{post.image.url}}" alt="photo" style="width: 500px">
 {% endif %}
-
-
+<br>
 {% if post.user == user %}
 <a href="{% url 'detail' post.id %}">Edit</a>
     
 {% endif %}
+
+
+<h3>Number of posts: {{postComments.count}}</h3>
 
 {% for postComment in postComments %}
 <hr>
@@ -27,13 +29,19 @@ hej
     <h2>{{postComment.post}}</h2>
     <h4>Odpowiedział/a: {{postComment.user}}</h4>
     <p>{{postComment.content}}</p>
-     {% if postComment.image %}
+    {% if postComment.image %}
         <img src="{{postComment.image.url}}" >
     {% endif %}
+    <div>
+        {% if postComment.user == user %}
+        <button type="submit">Edit</button>
+        {% endif %}
+        </div>
 </div>
 <hr>
 
 {% endfor %}
+
     
 {% endblock content %}
 
