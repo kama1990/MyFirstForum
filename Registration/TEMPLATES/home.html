@@ -18,6 +18,14 @@
     {% endif %}
     <h4>Author: {{allPost.user}}</h4>
     <h4>Topic: {{allPost.topic}}</h4>
+
+
+    
+{% for postComment in postComments %}
+{{postComment.post}}
+{{postComment.user}}
+{{postComment.content}}
+{% endfor %}
             
 {% endfor %}
 

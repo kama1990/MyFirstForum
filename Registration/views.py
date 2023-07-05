@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from .models import Posts
+from .models import Posts, PostComment
 from .forms import PostForm, CommentForm
 
 
@@ -63,8 +63,7 @@ def deletePost(request, postId):
 # we want to open each post , after below view , we create html file and path in urls
 def detailPost(request, postId):
     post = get_object_or_404(Posts, id=postId)
-    return render(request, 'detailPost.html', {'post':post})
-    
-
+    postComments = post.comments.all().order_by("-createDate") # comments -= related_name
+    return render(request,'detailPost.html', {'post':post, "postComments":postComments})
 
 

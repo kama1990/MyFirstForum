@@ -20,9 +20,24 @@ hej
 <a href="{% url 'detail' post.id %}">Edit</a>
     
 {% endif %}
-    
 
 
+
+
+
+{% for postComment in postComments %}
+<hr>
+<div>
+    <h2>{{postComment.post}}</h2>
+    <h4>Odpowiedział/a: {{postComment.user}}</h4>
+    <p>{{postComment.content}}</p>
+     {% if postComment.image %}
+        <img src="{{postComment.image.url}}" >
+    {% endif %}
+</div>
+<hr>
+
+{% endfor %}
     
 {% endblock content %}
 

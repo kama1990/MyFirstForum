@@ -34,7 +34,7 @@ class PostComment(models.Model):
     post = models.ForeignKey(Posts,on_delete=models.CASCADE,related_name='comments') # each post should has its commnet , we need to add realtionship between post model and commnet model
 
     def __str__(self):
-        return self.desc[:12]
+        return self.content
 
 
     # class Meta:
