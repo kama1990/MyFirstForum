@@ -5,10 +5,13 @@ from .forms import PostForm, CommentForm
 
 # Create your views here.
 
-
 def home(request):
-    usersPosts = Posts.objects.all().order_by('-createDate')
-    return render(request, 'home.html', {'posts':usersPosts})
+    return render(request, 'home.html')
+
+
+def post(request):
+    posts = Posts.objects.all().order_by('-createDate')
+    return render(request, 'post.html', {'posts':posts})
 
 
 def myOwn(request):
@@ -26,7 +29,7 @@ def createNewPosts(request):
             post = form.save(commit=False) # it create post but it will be not save yet
             post.user = request.user # we have to add user
             post.save() # now we can save it
-            return redirect('home') # Redirecting user to localhost:8000/posts
+            return redirect('post') # Redirecting user to localhost:8000/posts
         # we have to remeber about - what if somethong goes wrong
         else:
             error = 'Something went wrong'
@@ -47,7 +50,7 @@ def detail(request, postId):
         if form.is_valid():
             form.save()
             #zawsze return na koniec widoku
-            return redirect('home')
+            return redirect('post')
         # we want to gives one more chance to user
         else:
             error = "Something went wrong. Please try one more time"
@@ -57,7 +60,7 @@ def detail(request, postId):
 def deletePost(request, postId):
     post = get_object_or_404(Posts, id=postId, user=request.user)
     post.delete()
-    return redirect('home')
+    return redirect('post')
     # return render(request, 'deletePost.html') # we could use retur redirect('posts' ), we have to know where we want to put user through after delete post . posts is name from urls. but we wanted , that user knew that he is delete post .
 
 # we want to open each post , after below view , we create html file and path in urls
@@ -65,5 +68,8 @@ def detailPost(request, postId):
     post = get_object_or_404(Posts, id=postId)
     postComments = post.comments.all().order_by("-createDate") # comments -= related_name
     return render(request,'detailPost.html', {'post':post, "postComments":postComments})
+
+
+
 
 

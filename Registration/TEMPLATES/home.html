@@ -1,20 +1,18 @@
 {% extends 'base.html' %}
+
+
 {% block content %}
-
-
-
-    {% for post in posts%}
-<hr>
-    <a href="{% url 'detailPost' post.id %}"><h2>{{post.title}}</h2></a>
-    <p>{{post.createDate}}</p>
-    <h4>{{post.dec}}</h4>
-    {% if post.image %}
-        <img src="{{post.image.url}}" alt="photo">
-    {% endif %}
-
-    {% endfor %}
-
-
-
-
+<br>
+<div>
+    <h1 style="text-align: center">Witamy na twarzo-książce</h1>
+    <p style="text-align: center"> jedno z nielicznych miejsc, gdzie w bardzo krótkim czasie</p>
+        <p style="text-align: center"> znajdziesz nabywcę na swoje niepotrzebne rzeczy</p>
+        <p style="text-align: center">znajdziesz to czego szukasz </p>
+        <p style="text-align: center">bądź też wymienisz się z innym uczestnikem fora! Zapraszamy!</p>
+<br>
+    <p style="text-align: center"> <a href="{% url 'post' %}">Let's go!</a></p>
+ 
+</div>
 {% endblock content %}
+
+    

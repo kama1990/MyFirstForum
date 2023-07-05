@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+    {% for post in posts%}
+<hr>
+    <a href="{% url 'detailPost' post.id %}"><h2>{{post.title}}</h2></a>
+    <p>{{post.createDate}}</p>
+    <h4>{{post.dec}}</h4>
+    <h4>Author: {{post.user}}</h4>
+    <h4>Topic: {{post.topic}} </h4>
+    {% if post.image %}
+        <img src="{{post.image.url}}" alt="photo" style="width: 500px">
+
+
+    {% endif %}
+
+
+    {% endfor %}
+
+    
+
+
+{% endblock content %}
