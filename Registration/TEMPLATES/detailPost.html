@@ -21,7 +21,8 @@ hej
 {% endif %}
 
 
-<h3>Number of posts: {{postComments.count}}</h3>
+<h3>Number of posts: {{postComments.count}} </h3>
+
 
 {% for postComment in postComments %}
 <hr>
@@ -30,11 +31,23 @@ hej
     <h4>Odpowiedział/a: {{postComment.user}}</h4>
     <p>{{postComment.content}}</p>
     {% if postComment.image %}
-        <img src="{{postComment.image.url}}" >
+        <img src="{{postComment.image.url}}" alt="photo" style="width: 500px" >
     {% endif %}
     <div>
         {% if postComment.user == user %}
-        <button type="submit">Edit</button>
+            <form action="{% url 'createAnswerPost' post.id %}">
+                {% csrf_token %}
+                <button type="submit">Answer</button>
+            </form>
+            <br>
+            <a href="{% url 'detail' post.id %}"
+                <button type="submit">Edit</button> </a>
+
+        {% else %}
+            <form action="{% url 'createAnswerPost' post.id %}">
+                {% csrf_token %}
+                <button type="submit">Answer</button>
+            </form>
         {% endif %}
         </div>
 </div>

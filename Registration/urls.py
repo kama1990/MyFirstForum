@@ -10,5 +10,6 @@ urlpatterns = [
     path('<int:postId>/', views.detail, name='detail'),
     path('<int:postId>/delete/', views.deletePost, name='deletePost'),
     path('<int:postId>/detailPost/', views.detailPost, name='detailPost'),    
+    path('<int:postId>/createAnswerPost/', views.createAnswerPost, name='createAnswerPost'),    
    
 ]

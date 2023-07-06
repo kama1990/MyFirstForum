@@ -67,7 +67,27 @@ def deletePost(request, postId):
 def detailPost(request, postId):
     post = get_object_or_404(Posts, id=postId)
     postComments = post.comments.all().order_by("-createDate") # comments -= related_name
-    return render(request,'detailPost.html', {'post':post, "postComments":postComments})
+    return render(request,'detailPost.html', {'post':post, 'postComments':postComments})
+
+
+def createAnswerPost(request, postId):
+    post = get_object_or_404(Posts, id=postId)
+    if request.method == 'GET':
+        return render(request, 'createAnswerPost.html', {'form':CommentForm(), 'post':post})
+    else:
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comments = form.save(commit=False)
+            comments.user = request.user
+            comments.post = post
+            comments.save()
+            # return redirect('home')
+            return redirect('http://127.0.0.1:8000/'+str(postId)+'/detailPost/')
+        
+        else:
+            error = "Something went wrong. Please try again!"
+            return render(request, 'createAnswerPost.html', {'form':CommentForm(), 'post':post, 'error':error})
+
 
 
 

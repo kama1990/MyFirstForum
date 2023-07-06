@@ -12,9 +12,16 @@
     <h4>Topic: {{post.topic}} </h4>
     {% if post.image %}
         <img src="{{post.image.url}}" alt="photo" style="width: 500px">
-
-
     {% endif %}
+    <br>
+    <a href="{% url 'detailPost' post.id %}">Check the answers</a>
+    <br>
+    <br>
+    <form action="{% url 'createAnswerPost' post.id %}">
+        {% csrf_token %}
+        <button type="submit">Answer</button>
+    </form>
+
 
 
     {% endfor %}
