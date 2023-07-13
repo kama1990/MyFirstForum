@@ -18,12 +18,21 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from Registration import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('MainUser.urls')),
     path('', include('Registration.urls')),
+    path('post/', views.post, name='post'),
+    path('myOwn/', views.myOwn, name='myOwn'),
+    path('createNewPosts/', views.createNewPosts, name='createNewPosts'),
+    path('<int:postId>/', views.detail, name='detail'),
+    path('<int:postId>/delete/', views.deletePost, name='deletePost'),
+    path('<int:postId>/detailPost/', views.detailPost, name='detailPost'),    
+    path('<int:postId>/createAnswerPost/', views.createAnswerPost, name='createAnswerPost'),    
+    path('<int:commentId>/editAnswerPost/', views.editAnswerPost, name='editAnswerPost'),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{post.title}}</h1>
+<h4>{{post.dec}}</h4>
+
+{% if post.image %}
+    <img src="{{post.image.url}}" alt="photo" style="width: 300px">
+{% endif %}
+<br>
+<h2>Edit Answer:</h2>
+{{error}}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}  
+    <button type="submit">Save post</button>
+
+</form>
+{% endblock content %}
+
+

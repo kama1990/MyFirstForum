@@ -40,7 +40,7 @@ def createNewPosts(request):
 # we want to edit the posts        
 def detail(request, postId):
     # Use get() to return an object, or raise a Http404 exception if the object does not exist.
-    post = get_object_or_404(Posts, id=postId, user=request.user)
+    post = get_object_or_404(Posts, pk=postId, user=request.user)
     if request.method == 'GET':
         form = PostForm(instance=post)
         return render(request, 'detail.html', {'post':post, 'form':form})
@@ -58,20 +58,20 @@ def detail(request, postId):
         
 
 def deletePost(request, postId):
-    post = get_object_or_404(Posts, id=postId, user=request.user)
+    post = get_object_or_404(Posts, pk=postId, user=request.user)
     post.delete()
     return redirect('post')
     # return render(request, 'deletePost.html') # we could use retur redirect('posts' ), we have to know where we want to put user through after delete post . posts is name from urls. but we wanted , that user knew that he is delete post .
 
 # we want to open each post , after below view , we create html file and path in urls
 def detailPost(request, postId):
-    post = get_object_or_404(Posts, id=postId)
-    postComments = post.comments.all().order_by("-createDate") # comments -= related_name
-    return render(request,'detailPost.html', {'post':post, 'postComments':postComments})
+    post = get_object_or_404(Posts, pk=postId)
+    comments = post.comments.all().order_by('-createDate') # comments -= related_name
+    return render(request,'detailPost.html', {'post':post, 'comments':comments})
 
 
 def createAnswerPost(request, postId):
-    post = get_object_or_404(Posts, id=postId)
+    post = get_object_or_404(Posts, pk=postId)
     if request.method == 'GET':
         return render(request, 'createAnswerPost.html', {'form':CommentForm(), 'post':post})
     else:
@@ -81,12 +81,30 @@ def createAnswerPost(request, postId):
             comments.user = request.user
             comments.post = post
             comments.save()
-            # return redirect('home')
             return redirect('http://127.0.0.1:8000/'+str(postId)+'/detailPost/')
         
         else:
             error = "Something went wrong. Please try again!"
             return render(request, 'createAnswerPost.html', {'form':CommentForm(), 'post':post, 'error':error})
+        
+
+def editAnswerPost(request, commentId):
+    comment = get_object_or_404(PostComment, pk=commentId, user=request.user)
+    post = get_object_or_404(Posts, pk=comment.post.id)
+    if request.method == 'GET':
+        form = CommentForm(instance=comment)
+        return render(request, 'editAnswerPost.html', {'form':form, 'post':post, 'comment':comment})
+    else:
+        form = CommentForm(request.POST, request.FILES, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('http://127.0.0.1:8000/'+str(post.id)+'/detailPost/')
+        else:
+            error = "Something went wrong. Please try again!"
+            return render(request, 'editAnswerPost.html', {'form':form, 'post':post, 'comment':comment, 'error':error})
+        
+    
+
 
 
 

@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-hej
-
 {% block content %}
 
 <h1>{{post.title}}</h1>
@@ -15,45 +13,48 @@ hej
     <img src="{{post.image.url}}" alt="photo" style="width: 500px">
 {% endif %}
 <br>
-{% if post.user == user %}
-<a href="{% url 'detail' post.id %}">Edit</a>
     
+{% if post.user == user %}
+
+    <form action="{% url 'createAnswerPost' post.id %}">
+    {% csrf_token %}
+    <button type="submit">Answer</button>
+    </form>
+    <a href="{% url 'detail' post.id %}" role="button">Edit</a>
+
+{% else %}
+
+    <form action="{% url 'createAnswerPost' post.id %}">
+    {% csrf_token %}
+    <button type="submit">Answer</button>
+    </form>
+
 {% endif %}
 
 
-<h3>Number of posts: {{postComments.count}} </h3>
 
+<h3>Number of comments: {{comments.count}} </h3>
 
-{% for postComment in postComments %}
+{% for comment in comments %}
 <hr>
-<div>
-    <h2>{{postComment.post}}</h2>
-    <h4>Odpowiedział/a: {{postComment.user}}</h4>
-    <p>{{postComment.content}}</p>
-    {% if postComment.image %}
-        <img src="{{postComment.image.url}}" alt="photo" style="width: 500px" >
-    {% endif %}
-    <div>
-        {% if postComment.user == user %}
-            <form action="{% url 'createAnswerPost' post.id %}">
-                {% csrf_token %}
-                <button type="submit">Answer</button>
-            </form>
-            <br>
-            <a href="{% url 'detail' post.id %}"
-                <button type="submit">Edit</button> </a>
+<h4>{{comment.createDate}} Odpowiedział/a: {{comment.user}}</h4>
+<h4>{{comment.content}}</h4>
 
-        {% else %}
-            <form action="{% url 'createAnswerPost' post.id %}">
-                {% csrf_token %}
-                <button type="submit">Answer</button>
-            </form>
-        {% endif %}
-        </div>
-</div>
-<hr>
+{% if comment.image %}
+        <img src="{{comment.image.url}}" alt="photo" style="width: 500px" >
+{% endif %}
+{% if comment.user == user %}
+    <form action="{% url 'editAnswerPost' comment.id %}">
+    {% csrf_token %}
+    <button type="submit">Edit</button>
+    </form>
+
+{% endif %}
 
 {% endfor %}
+<hr>
+
+
 
     
 {% endblock content %}
